@@ -20,7 +20,7 @@
     <div class="brand-dot"></div>
     <span class="brand-title">Residencial Exclusivo</span>
     <div class="brand-divider"></div>
-    <span class="brand-meta">7 Pisos + Planta Baja</span>
+    <span class="brand-meta">Pisos 1 al 6 + Planta Baja</span>
   </nav>
 
   <!-- Botón Flotante para Salir del Zoom (Aparece tras hacer clic en un piso) -->
@@ -31,10 +31,10 @@
   <!-- 1. Contenedor Maestro Pantalla Completa: El Render es el fondo total -->
   <main class="stage-fullscreen" id="stageFullscreen">
 
-    <!-- SVG Responsivo en Espacio Nativo 4788 x 3584 -->
+    <!-- SVG Responsivo en Espacio Nativo 2396 x 1792 (NewCatarata.jpg) -->
     <svg 
-      viewBox="0 0 4788 3584" 
-      preserveAspectRatio="xMidYMid slice" 
+      viewBox="0 0 2396 1792" 
+      preserveAspectRatio="xMidYMin slice" 
       class="building-svg" 
       id="buildingSvg"
       aria-label="Mapa interactivo del edificio"
@@ -44,102 +44,151 @@
 
         <!-- Imagen Original en Alta Resolución como base -->
         <image 
-          href="./IMAGENPRINCIPAL/tungtungsahur.jpg" 
+          href="./IMAGENPRINCIPAL/NewCatarata.jpg" 
           x="0" 
           y="0" 
-          width="4788" 
-          height="3584" 
+          width="2396" 
+          height="1792" 
           id="masterBgImage"
         />
 
-        <!-- Capa de Zonas Interactivas (7 Pisos + Planta Baja) -->
+        <!-- Capa de Zonas Interactivas (Pisos 1 al 6 + Planta Baja) -->
         <g id="floorsOverlay">
 
-          <!-- PISO 7 • PENTHOUSE (Bajo los arcos) -->
-          <g class="floor-group" data-floor="7" id="floor-7" tabindex="0" role="button" aria-label="Piso 7 Penthouse">
-            <rect class="floor-hotspot" x="730" y="200" width="3630" height="410" rx="24" />
-            <line class="floor-slab-top" x1="730" y1="200" x2="4360" y2="200" />
-            <line class="floor-slab-bot" x1="730" y1="610" x2="4360" y2="610" />
-            <g class="svg-badge" transform="translate(770, 390)">
-              <rect x="0" y="0" width="230" height="48" rx="8" fill="rgba(10,14,22,0.85)" stroke="rgba(255,255,255,0.3)" />
-              <text x="115" y="30" fill="#ffffff" font-size="22" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" text-anchor="middle">PISO 7 • PH</text>
-            </g>
-          </g>
-
           <!-- PISO 6 -->
-          <g class="floor-group" data-floor="6" id="floor-6" tabindex="0" role="button" aria-label="Piso 6">
-            <rect class="floor-hotspot" x="680" y="610" width="3730" height="220" rx="10" />
-            <line class="floor-slab-top" x1="680" y1="610" x2="4410" y2="610" />
-            <line class="floor-slab-bot" x1="680" y1="830" x2="4410" y2="830" />
-            <g class="svg-badge" transform="translate(720, 710)">
-              <rect x="0" y="0" width="180" height="44" rx="8" fill="rgba(10,14,22,0.85)" stroke="rgba(255,255,255,0.3)" />
-              <text x="90" y="28" fill="#ffffff" font-size="20" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" text-anchor="middle">PISO 6</text>
+          <g class="floor-group" data-floor="6" id="floor-6" tabindex="0" role="group" aria-label="Piso 6">
+            <line class="floor-slab-top" x1="360" y1="305" x2="2190" y2="305" />
+            <line class="floor-slab-bot" x1="360" y1="410" x2="2190" y2="410" />
+            <!-- Grids de Balcones / Apartamentos (4 Torre A + 4 Torre B - Hueco central vacío) -->
+            <g class="units-container">
+              <rect class="unit-hotspot" data-floor="6" data-unit="601" data-x="471" data-y="358" x="368" y="305" width="207" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="6" data-unit="602" data-x="712" data-y="358" x="600" y="305" width="225" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="6" data-unit="603" data-x="955" data-y="358" x="850" y="305" width="210" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="6" data-unit="604" data-x="1155" data-y="358" x="1080" y="305" width="150" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="6" data-unit="605" data-x="1385" data-y="358" x="1310" y="305" width="150" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="6" data-unit="606" data-x="1590" data-y="358" x="1485" y="305" width="210" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="6" data-unit="607" data-x="1832" data-y="358" x="1720" y="305" width="225" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="6" data-unit="608" data-x="2075" data-y="358" x="1970" y="305" width="210" height="105" rx="4" />
+            </g>
+            <g class="svg-badge" transform="translate(370, 355)" role="button" data-floor="6">
+              <rect x="0" y="0" width="130" height="36" rx="6" fill="rgba(10,14,22,0.85)" stroke="rgba(255,255,255,0.3)" />
+              <text x="65" y="24" fill="#ffffff" font-size="16" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" text-anchor="middle">PISO 6</text>
             </g>
           </g>
 
           <!-- PISO 5 -->
-          <g class="floor-group" data-floor="5" id="floor-5" tabindex="0" role="button" aria-label="Piso 5">
-            <rect class="floor-hotspot" x="660" y="830" width="3770" height="224" rx="10" />
-            <line class="floor-slab-top" x1="660" y1="830" x2="4430" y2="830" />
-            <line class="floor-slab-bot" x1="660" y1="1054" x2="4430" y2="1054" />
-            <g class="svg-badge" transform="translate(700, 930)">
-              <rect x="0" y="0" width="180" height="44" rx="8" fill="rgba(10,14,22,0.85)" stroke="rgba(255,255,255,0.3)" />
-              <text x="90" y="28" fill="#ffffff" font-size="20" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" text-anchor="middle">PISO 5</text>
+          <g class="floor-group" data-floor="5" id="floor-5" tabindex="0" role="group" aria-label="Piso 5">
+            <line class="floor-slab-top" x1="360" y1="420" x2="2190" y2="420" />
+            <line class="floor-slab-bot" x1="360" y1="525" x2="2190" y2="525" />
+            <!-- Grids de Balcones / Apartamentos (4 Torre A + 4 Torre B - Hueco central vacío) -->
+            <g class="units-container">
+              <rect class="unit-hotspot" data-floor="5" data-unit="501" data-x="471" data-y="473" x="368" y="420" width="207" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="5" data-unit="502" data-x="712" data-y="473" x="600" y="420" width="225" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="5" data-unit="503" data-x="955" data-y="473" x="850" y="420" width="210" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="5" data-unit="504" data-x="1155" data-y="473" x="1080" y="420" width="150" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="5" data-unit="505" data-x="1385" data-y="473" x="1310" y="420" width="150" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="5" data-unit="506" data-x="1590" data-y="473" x="1485" y="420" width="210" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="5" data-unit="507" data-x="1832" data-y="473" x="1720" y="420" width="225" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="5" data-unit="508" data-x="2075" data-y="473" x="1970" y="420" width="210" height="105" rx="4" />
+            </g>
+            <g class="svg-badge" transform="translate(370, 470)" role="button" data-floor="5">
+              <rect x="0" y="0" width="130" height="36" rx="6" fill="rgba(10,14,22,0.85)" stroke="rgba(255,255,255,0.3)" />
+              <text x="65" y="24" fill="#ffffff" font-size="16" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" text-anchor="middle">PISO 5</text>
             </g>
           </g>
 
           <!-- PISO 4 -->
-          <g class="floor-group" data-floor="4" id="floor-4" tabindex="0" role="button" aria-label="Piso 4">
-            <rect class="floor-hotspot" x="650" y="1054" width="3790" height="228" rx="10" />
-            <line class="floor-slab-top" x1="650" y1="1054" x2="4440" y2="1054" />
-            <line class="floor-slab-bot" x1="650" y1="1282" x2="4440" y2="1282" />
-            <g class="svg-badge" transform="translate(690, 1160)">
-              <rect x="0" y="0" width="180" height="44" rx="8" fill="rgba(10,14,22,0.85)" stroke="rgba(255,255,255,0.3)" />
-              <text x="90" y="28" fill="#ffffff" font-size="20" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" text-anchor="middle">PISO 4</text>
+          <g class="floor-group" data-floor="4" id="floor-4" tabindex="0" role="group" aria-label="Piso 4">
+            <line class="floor-slab-top" x1="360" y1="535" x2="2190" y2="535" />
+            <line class="floor-slab-bot" x1="360" y1="640" x2="2190" y2="640" />
+            <!-- Grids de Balcones / Apartamentos (4 Torre A + 4 Torre B - Hueco central vacío) -->
+            <g class="units-container">
+              <rect class="unit-hotspot" data-floor="4" data-unit="401" data-x="471" data-y="588" x="368" y="535" width="207" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="4" data-unit="402" data-x="712" data-y="588" x="600" y="535" width="225" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="4" data-unit="403" data-x="955" data-y="588" x="850" y="535" width="210" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="4" data-unit="404" data-x="1155" data-y="588" x="1080" y="535" width="150" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="4" data-unit="405" data-x="1385" data-y="588" x="1310" y="535" width="150" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="4" data-unit="406" data-x="1590" data-y="588" x="1485" y="535" width="210" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="4" data-unit="407" data-x="1832" data-y="588" x="1720" y="535" width="225" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="4" data-unit="408" data-x="2075" data-y="588" x="1970" y="535" width="210" height="105" rx="4" />
+            </g>
+            <g class="svg-badge" transform="translate(370, 585)" role="button" data-floor="4">
+              <rect x="0" y="0" width="130" height="36" rx="6" fill="rgba(10,14,22,0.85)" stroke="rgba(255,255,255,0.3)" />
+              <text x="65" y="24" fill="#ffffff" font-size="16" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" text-anchor="middle">PISO 4</text>
             </g>
           </g>
 
           <!-- PISO 3 -->
-          <g class="floor-group" data-floor="3" id="floor-3" tabindex="0" role="button" aria-label="Piso 3">
-            <rect class="floor-hotspot" x="650" y="1282" width="3790" height="232" rx="10" />
-            <line class="floor-slab-top" x1="650" y1="1282" x2="4440" y2="1282" />
-            <line class="floor-slab-bot" x1="650" y1="1514" x2="4440" y2="1514" />
-            <g class="svg-badge" transform="translate(690, 1390)">
-              <rect x="0" y="0" width="180" height="44" rx="8" fill="rgba(10,14,22,0.85)" stroke="rgba(255,255,255,0.3)" />
-              <text x="90" y="28" fill="#ffffff" font-size="20" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" text-anchor="middle">PISO 3</text>
+          <g class="floor-group" data-floor="3" id="floor-3" tabindex="0" role="group" aria-label="Piso 3">
+            <line class="floor-slab-top" x1="360" y1="650" x2="2190" y2="650" />
+            <line class="floor-slab-bot" x1="360" y1="755" x2="2190" y2="755" />
+            <!-- Grids de Balcones / Apartamentos (4 Torre A + 4 Torre B - Hueco central vacío) -->
+            <g class="units-container">
+              <rect class="unit-hotspot" data-floor="3" data-unit="301" data-x="471" data-y="703" x="368" y="650" width="207" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="3" data-unit="302" data-x="712" data-y="703" x="600" y="650" width="225" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="3" data-unit="303" data-x="955" data-y="703" x="850" y="650" width="210" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="3" data-unit="304" data-x="1155" data-y="703" x="1080" y="650" width="150" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="3" data-unit="305" data-x="1385" data-y="703" x="1310" y="650" width="150" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="3" data-unit="306" data-x="1590" data-y="703" x="1485" y="650" width="210" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="3" data-unit="307" data-x="1832" data-y="703" x="1720" y="650" width="225" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="3" data-unit="308" data-x="2075" data-y="703" x="1970" y="650" width="210" height="105" rx="4" />
+            </g>
+            <g class="svg-badge" transform="translate(370, 700)" role="button" data-floor="3">
+              <rect x="0" y="0" width="130" height="36" rx="6" fill="rgba(10,14,22,0.85)" stroke="rgba(255,255,255,0.3)" />
+              <text x="65" y="24" fill="#ffffff" font-size="16" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" text-anchor="middle">PISO 3</text>
             </g>
           </g>
 
-          <!-- PISO 2 (CONECTADO AL VIDEO TOUR THEOUTCOME.MP4) -->
-          <g class="floor-group is-active" data-floor="2" id="floor-2" tabindex="0" role="button" aria-label="Piso 2 con Video Tour">
-            <rect class="floor-hotspot" x="660" y="1514" width="3770" height="228" rx="10" />
-            <line class="floor-slab-top" x1="660" y1="1514" x2="4430" y2="1514" />
-            <line class="floor-slab-bot" x1="660" y1="1742" x2="4430" y2="1742" />
-            <g class="svg-badge" transform="translate(700, 1620)">
-              <rect x="0" y="0" width="220" height="44" rx="8" fill="rgba(10,14,22,0.85)" stroke="rgba(207,168,100,0.5)" />
-              <text x="110" y="28" fill="#cfa864" font-size="18" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" text-anchor="middle">PISO 2 • 🎬 VIDEO</text>
+          <!-- PISO 2 -->
+          <g class="floor-group" data-floor="2" id="floor-2" tabindex="0" role="group" aria-label="Piso 2">
+            <line class="floor-slab-top" x1="360" y1="765" x2="2190" y2="765" />
+            <line class="floor-slab-bot" x1="360" y1="870" x2="2190" y2="870" />
+            <!-- Grids de Balcones / Apartamentos (4 Torre A + 4 Torre B - Hueco central vacío) -->
+            <g class="units-container">
+              <rect class="unit-hotspot" data-floor="2" data-unit="201" data-x="471" data-y="818" x="368" y="765" width="207" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="2" data-unit="202" data-x="712" data-y="818" x="600" y="765" width="225" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="2" data-unit="203" data-x="955" data-y="818" x="850" y="765" width="210" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="2" data-unit="204" data-x="1155" data-y="818" x="1080" y="765" width="150" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="2" data-unit="205" data-x="1385" data-y="818" x="1310" y="765" width="150" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="2" data-unit="206" data-x="1590" data-y="818" x="1485" y="765" width="210" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="2" data-unit="207" data-x="1832" data-y="818" x="1720" y="765" width="225" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="2" data-unit="208" data-x="2075" data-y="818" x="1970" y="765" width="210" height="105" rx="4" />
+            </g>
+            <g class="svg-badge" transform="translate(370, 815)" role="button" data-floor="2">
+              <rect x="0" y="0" width="130" height="36" rx="6" fill="rgba(10,14,22,0.85)" stroke="rgba(255,255,255,0.3)" />
+              <text x="65" y="24" fill="#ffffff" font-size="16" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" text-anchor="middle">PISO 2</text>
             </g>
           </g>
 
           <!-- PISO 1 -->
-          <g class="floor-group" data-floor="1" id="floor-1" tabindex="0" role="button" aria-label="Piso 1">
-            <rect class="floor-hotspot" x="670" y="1742" width="3750" height="228" rx="10" />
-            <line class="floor-slab-top" x1="670" y1="1742" x2="4420" y2="1742" />
-            <line class="floor-slab-bot" x1="670" y1="1970" x2="4420" y2="1970" />
-            <g class="svg-badge" transform="translate(710, 1850)">
-              <rect x="0" y="0" width="180" height="44" rx="8" fill="rgba(10,14,22,0.85)" stroke="rgba(255,255,255,0.3)" />
-              <text x="90" y="28" fill="#ffffff" font-size="20" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" text-anchor="middle">PISO 1</text>
+          <g class="floor-group" data-floor="1" id="floor-1" tabindex="0" role="group" aria-label="Piso 1">
+            <line class="floor-slab-top" x1="360" y1="880" x2="2190" y2="880" />
+            <line class="floor-slab-bot" x1="360" y1="985" x2="2190" y2="985" />
+            <!-- Grids de Balcones / Apartamentos (4 Torre A + 4 Torre B - Hueco central vacío) -->
+            <g class="units-container">
+              <rect class="unit-hotspot" data-floor="1" data-unit="101" data-x="471" data-y="933" x="368" y="880" width="207" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="1" data-unit="102" data-x="712" data-y="933" x="600" y="880" width="225" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="1" data-unit="103" data-x="955" data-y="933" x="850" y="880" width="210" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="1" data-unit="104" data-x="1155" data-y="933" x="1080" y="880" width="150" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="1" data-unit="105" data-x="1385" data-y="933" x="1310" y="880" width="150" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="1" data-unit="106" data-x="1590" data-y="933" x="1485" y="880" width="210" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="1" data-unit="107" data-x="1832" data-y="933" x="1720" y="880" width="225" height="105" rx="4" />
+              <rect class="unit-hotspot" data-floor="1" data-unit="108" data-x="2075" data-y="933" x="1970" y="880" width="210" height="105" rx="4" />
+            </g>
+            <g class="svg-badge" transform="translate(370, 930)" role="button" data-floor="1">
+              <rect x="0" y="0" width="130" height="36" rx="6" fill="rgba(10,14,22,0.85)" stroke="rgba(255,255,255,0.3)" />
+              <text x="65" y="24" fill="#ffffff" font-size="16" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" text-anchor="middle">PISO 1</text>
             </g>
           </g>
 
-          <!-- PLANTA BAJA (Lobby / Amenities) -->
-          <g class="floor-group" data-floor="PB" id="floor-PB" tabindex="0" role="button" aria-label="Planta Baja Lobby">
-            <rect class="floor-hotspot" x="680" y="1970" width="3730" height="390" rx="14" />
-            <line class="floor-slab-top" x1="680" y1="1970" x2="4410" y2="1970" />
-            <line class="floor-slab-bot" x1="680" y1="2360" x2="4410" y2="2360" />
-            <g class="svg-badge" transform="translate(720, 2140)">
-              <rect x="0" y="0" width="230" height="48" rx="8" fill="rgba(10,14,22,0.85)" stroke="rgba(255,255,255,0.3)" />
-              <text x="115" y="30" fill="#ffffff" font-size="22" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" text-anchor="middle">PLANTA BAJA</text>
+          <!-- PLANTA BAJA (Lobby / Amenities / Piscinas) -->
+          <g class="floor-group" data-floor="PB" id="floor-PB" tabindex="0" role="button" aria-label="Planta Baja Lobby y Piscinas">
+            <rect class="floor-hotspot" x="340" y="985" width="1860" height="770" rx="14" />
+            <line class="floor-slab-top" x1="340" y1="985" x2="2200" y2="985" />
+            <line class="floor-slab-bot" x1="340" y1="1200" x2="2200" y2="1200" />
+            <g class="svg-badge" transform="translate(370, 1100)">
+              <rect x="0" y="0" width="220" height="38" rx="6" fill="rgba(10,14,22,0.85)" stroke="rgba(255,255,255,0.3)" />
+              <text x="110" y="25" fill="#ffffff" font-size="15" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" text-anchor="middle">PLANTA BAJA • PISCINAS</text>
             </g>
           </g>
 
@@ -225,9 +274,9 @@
         <span class="price-number" id="displayPrice">$315,000 USD</span>
       </div>
 
-      <!-- Botón de Entrada por Video Tour (Activo para Piso 2) -->
+      <!-- Botón de Acción -->
       <button class="btn-enter-apartment" id="btnEnterApartment">
-        <span>🎬 Ver Tour Interior (Video)</span>
+        <span>🔍 Ver Detalles del Piso</span>
       </button>
     </div>
 

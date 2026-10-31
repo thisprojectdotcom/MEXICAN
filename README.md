@@ -1,23 +1,26 @@
 # 🏢 Masterplan Interactivo - Residencial Exclusivo
 
-Interfaz web interactiva y responsiva de visualización arquitectónica inmobiliaria en alta resolución para selección de pisos de un edificio residencial (7 Pisos + Planta Baja).
+Interfaz web interactiva y responsiva de visualización arquitectónica inmobiliaria en alta resolución para selección de pisos y apartamentos de un edificio residencial (6 Pisos + Planta Baja, 48 departamentos).
 
 ---
 
 ## ✨ Características Principales
 
-- **Fondo Completo y Escenario SVG:** Render arquitectónico de alta resolución (`4788 × 3584 px`) acoplado matemáticamente a zonas vectoriales interactivas mediante SVG con `viewBox` y `preserveAspectRatio="xMidYMid slice"`, garantizando alineación sin desfasajes.
+- **Fondo Completo y Escenario SVG:** Render arquitectónico de alta resolución (`2396 × 1792 px`, `NewCatarata.jpg`) acoplado matemáticamente a zonas vectoriales interactivas mediante SVG con `viewBox` y `preserveAspectRatio="xMidYMin slice"`, garantizando alineación sin desfasajes.
+- **Grids Calibrados e Independientes:**
+  - 48 apartamentos individuales (6 pisos × 8 unidades por nivel: 4 en Torre A y 4 en Torre B).
+  - Espacio central (vacío / pasillo arquitectónico) completamente omitido y respetado sin solapamientos.
+  - Separación física (*gutters* de 20-25 px) entre contenedores que respeta las columnas y pilares estructurales.
+  - Cuadrículas 100% transparentadas (`fill: transparent; stroke: transparent`) con iluminación neutra al pasar el cursor o seleccionar.
 - **Detección y Selección de Pisos:** 
-  - Planta Baja (Lobby / Amenities).
-  - Pisos 1 al 6 (Residencias de 2 y 3 recámaras).
-  - Piso 7 (Penthouse de 4 recámaras).
+  - Planta Baja (Lobby / Amenities / Piscinas).
+  - Pisos 1 al 6 (Residencias de 2 y 3 recámaras), con etiquetas uniformes `PISO 1` a `PISO 6`.
 - **Efectos Cinemáticos & Zoom Dinámico:** 
   - Zoom dinámico calculado por coordenada `pixelCenterY` con transformación suave.
-  - Iluminación orgánica y resaltado de losas (`mix-blend-mode: screen`).
   - Panel lateral flotante con estética *glassmorphism* (`backdrop-filter: blur(24px)`).
 - **Integración Multimedia:**
-  - Video inmersivo (`theoutcome.mp4`) en Piso 2 con transición y crossfade.
-- **Zero Dependencies:** Desarrollado 100% en Vanilla HTML5, CSS3 moderno y JavaScript Vanilla nativo.
+  - Video inmersivo (`theoutcome.mp4`) en Piso 2 (Depto 204) con transición cinemática convergente y controles HUD.
+- **Zero Dependencies:** Desarrollado 100% en Vanilla HTML5, CSS3 moderno y JavaScript nativo.
 
 ---
 
@@ -25,8 +28,9 @@ Interfaz web interactiva y responsiva de visualización arquitectónica inmobili
 
 ```text
 ├── IMAGENPRINCIPAL/
-│   └── tungtungsahur.jpg         # Render arquitectónico de ultra alta resolución
-├── app.js                         # Lógica interactiva, zoom dinámico y gestión de estados
+│   ├── NewCatarata.jpg            # Render principal calibrado
+│   └── tungtungsahur.jpg          # Render alternativo en alta resolución
+├── app.js                         # Lógica interactiva, zoom dinámico y catálogo de unidades
 ├── index.html                     # Maquetación semántica y capas SVG interactivas
 ├── styles.css                     # Estilos, glassmorphism, transiciones y HUD
 ├── theoutcome.mp4                 # Video inmersivo de recorrido interior

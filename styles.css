@@ -59,7 +59,8 @@ html, body {
 
 /* Grupo Escenario: Recibe la animación cinemática de zoom suave (scale(1.8) o scale(2.2)) */
 .scene-wrapper {
-  transform-origin: center center;
+  transform-box: view-box;
+  transform-origin: 0px 0px;
   transition: transform 1.15s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
 }
@@ -81,13 +82,19 @@ html, body {
   transition: fill 0.35s ease, stroke 0.35s ease, filter 0.35s ease;
 }
 
-/* Trazado luminoso de las losas estructurales (superior e inferior) */
+/* Trazado luminoso de las losas estructurales (superior, intermedia y inferior) */
 .floor-slab-top,
-.floor-slab-bot {
+.floor-slab-bot,
+.floor-slab-mid {
   stroke: transparent;
   stroke-width: 3;
   stroke-linecap: round;
   transition: stroke 0.35s ease, filter 0.35s ease;
+}
+
+.floor-slab-mid {
+  stroke-dasharray: 18, 14;
+  stroke-width: 2.2;
 }
 
 /* Efecto al pasar el cursor o piso activo:
@@ -107,25 +114,35 @@ html, body {
   filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
 }
 
-/* Piso con Video Tour Disponible (Piso 2): Acento dorado refinado en losas y borde */
-.floor-group[data-floor="2"] .floor-hotspot {
-  stroke: rgba(207, 168, 100, 0.12);
+.floor-group:hover .floor-slab-mid,
+.floor-group.is-active .floor-slab-mid {
+  stroke: rgba(255, 255, 255, 0.45);
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.3));
 }
 
-.floor-group[data-floor="2"]:hover .floor-hotspot,
-.floor-group[data-floor="2"].is-active .floor-hotspot {
+/* Grids individuales de Balcones / Apartamentos (Pisos 1 al 6) - 100% Transparentados */
+.unit-hotspot {
+  cursor: pointer;
   fill: transparent;
-  stroke: rgba(207, 168, 100, 0.45);
-  filter: drop-shadow(0 0 12px var(--accent-gold-glow));
+  stroke: transparent;
+  stroke-width: 2;
+  pointer-events: all;
+  transition: stroke 0.25s ease, fill 0.25s ease, filter 0.25s ease;
 }
 
-.floor-group[data-floor="2"]:hover .floor-slab-top,
-.floor-group[data-floor="2"]:hover .floor-slab-bot,
-.floor-group[data-floor="2"].is-active .floor-slab-top,
-.floor-group[data-floor="2"].is-active .floor-slab-bot {
-  stroke: var(--accent-gold);
-  filter: drop-shadow(0 0 10px var(--accent-gold-glow));
+.unit-hotspot:hover {
+  fill: transparent;
+  stroke: rgba(255, 255, 255, 0.7);
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4));
 }
+
+.unit-hotspot.is-selected {
+  fill: transparent;
+  stroke: rgba(255, 255, 255, 0.95);
+  filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.6));
+}
+
+
 
 /* ==========================================================================
    PLANTA BAJA (PB): Highlight 100% Invisible
@@ -153,18 +170,16 @@ html, body {
   display: none !important;
 }
 
-/* Etiqueta flotante en el extremo izquierdo del piso */
+/* Etiqueta flotante en el extremo del piso */
 .svg-badge {
   opacity: 0;
-  transform: translateX(-15px);
-  transition: opacity 0.3s ease, transform 0.3s var(--ease-lux);
+  transition: opacity 0.35s ease;
   pointer-events: none;
 }
 
 .floor-group:hover .svg-badge,
 .floor-group.is-active .svg-badge {
   opacity: 1;
-  transform: translateX(0);
 }
 
 /* 4. Barra Superior Discreta de Marca */
@@ -279,6 +294,15 @@ html, body {
   flex-direction: column;
   gap: 14px;
   transition: all 0.3s ease;
+}
+
+@keyframes cardDataPulse {
+  0% { opacity: 0.65; transform: translateY(3px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.floor-dynamic-card.is-updating {
+  animation: cardDataPulse 0.35s ease-out;
 }
 
 .card-top-row {
@@ -503,11 +527,11 @@ html, body {
   display: block;
 }
 
-/* Transición óptica cálida (Crossfade Golden Hour) para difuminar la diferencia de luz */
+/* Transición óptica limpia (Fade sutil cinematográfico) */
 .video-light-flash {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(220, 160, 90, 0.45) 0%, rgba(10, 14, 22, 0.75) 100%);
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.3) 0%, rgba(10, 14, 22, 0.75) 100%);
   opacity: 0;
   pointer-events: none;
   mix-blend-mode: screen;

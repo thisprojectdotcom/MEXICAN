@@ -11,5 +11,33 @@ $RECYCLE.BIN/
 *.sublime-project
 *.sublime-workspace
 
-# Log files
-*.log
+# Temporary debug crops and measurement rulers
+*_check.jpg
+*_zoom*.jpg
+*_ruler*.jpg
+*_strip*.jpg
+*_crop.jpg
+test_*.jpg
+fine_grid_*.jpg
+grid_inspection.jpg
+vertical_check.jpg
+horizontal_check.jpg
+fins_check.jpg
+cambiaellightning.jpeg
+center_*.jpg
+both_towers_roof.jpg
+full_roof_from_0.jpg
+pixel_perfect_check.jpg
+apartments_perfect_48.jpg
+apartments_preview_48.jpg
+verified_exact_48.jpg
+NewCatarata_grids_identificados.jpg
+NewCatarata_apartamentos_identificados.jpg
+new_catarata_grid_preview.jpg
+perfect_aligned_grid.jpg
+strip_torre_a_y.jpg
+torre_a_fine_y.jpg
+torre_a_measured.jpg
+torre_a_top_arches.jpg
+torre_b_measured.jpg
+zoom_balconies_piso2.jpg
