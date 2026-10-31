@@ -1,0 +1,648 @@
+/* ==========================================================================
+   INTERFAZ MASTERPLAN INTERACTIVO FULLSCREEN - RESIDENCIAL
+   Arquitectura: 7 Pisos + Planta Baja | Imagen Fondo Total | SVG Sincronizado
+   Fase 4: Transición Cinemática de Video al Interior (Piso 2)
+   ========================================================================== */
+
+/* 1. Reset Global y Variables de Diseño */
+:root {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --accent-gold: #cfa864;
+  --accent-gold-glow: rgba(207, 168, 100, 0.4);
+  --panel-bg: rgba(10, 14, 22, 0.74);
+  --panel-border: rgba(255, 255, 255, 0.12);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.65);
+  --text-muted: rgba(255, 255, 255, 0.45);
+  --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #05070b;
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 2. El Render es el Fondo Total del Sitio (100vw x 100vh) */
+.stage-fullscreen {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #05070b;
+  transition: filter 0.8s var(--ease-lux);
+}
+
+/* SVG a Pantalla Completa:
+   Garantiza que la imagen y los vectores de pisos compartan el mismo espacio
+   de 4788 x 3584 píxeles nativos. Cero desalineación bajo cualquier zoom o aspecto de pantalla. */
+.building-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Grupo Escenario: Recibe la animación cinemática de zoom suave (scale(1.8) o scale(2.2)) */
+.scene-wrapper {
+  transform-origin: center center;
+  transition: transform 1.15s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* 3. Highlight Natural del Piso (Orgánico, sin parche blanco lechoso) */
+.floor-group {
+  cursor: pointer;
+  outline: none;
+  transition: all 0.35s ease;
+}
+
+/* Superficie del piso: 
+   100% transparente para conservar la pureza y nitidez del render fotográfico */
+.floor-hotspot {
+  fill: transparent;
+  stroke: transparent;
+  stroke-width: 2;
+  pointer-events: all; /* Garantiza detección reactiva del cursor aun siendo 100% transparente */
+  transition: fill 0.35s ease, stroke 0.35s ease, filter 0.35s ease;
+}
+
+/* Trazado luminoso de las losas estructurales (superior e inferior) */
+.floor-slab-top,
+.floor-slab-bot {
+  stroke: transparent;
+  stroke-width: 3;
+  stroke-linecap: round;
+  transition: stroke 0.35s ease, filter 0.35s ease;
+}
+
+/* Efecto al pasar el cursor o piso activo:
+   Sin velo ni opacidad sobre la superficie (fill transparent) para máxima nitidez */
+.floor-group:hover .floor-hotspot,
+.floor-group.is-active .floor-hotspot {
+  fill: transparent; /* Cero velo lechoso sobre la fachada */
+  stroke: rgba(255, 255, 255, 0.2);
+  filter: none;
+}
+
+.floor-group:hover .floor-slab-top,
+.floor-group:hover .floor-slab-bot,
+.floor-group.is-active .floor-slab-top,
+.floor-group.is-active .floor-slab-bot {
+  stroke: rgba(255, 255, 255, 0.75);
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+}
+
+/* Piso con Video Tour Disponible (Piso 2): Acento dorado refinado en losas y borde */
+.floor-group[data-floor="2"] .floor-hotspot {
+  stroke: rgba(207, 168, 100, 0.12);
+}
+
+.floor-group[data-floor="2"]:hover .floor-hotspot,
+.floor-group[data-floor="2"].is-active .floor-hotspot {
+  fill: transparent;
+  stroke: rgba(207, 168, 100, 0.45);
+  filter: drop-shadow(0 0 12px var(--accent-gold-glow));
+}
+
+.floor-group[data-floor="2"]:hover .floor-slab-top,
+.floor-group[data-floor="2"]:hover .floor-slab-bot,
+.floor-group[data-floor="2"].is-active .floor-slab-top,
+.floor-group[data-floor="2"].is-active .floor-slab-bot {
+  stroke: var(--accent-gold);
+  filter: drop-shadow(0 0 10px var(--accent-gold-glow));
+}
+
+/* ==========================================================================
+   PLANTA BAJA (PB): Highlight 100% Invisible
+   Cero velo, cero bordes y cero líneas sobre la piscina, palmeras y lobby
+   ========================================================================== */
+.floor-group[data-floor="PB"] .floor-hotspot,
+.floor-group[data-floor="PB"]:hover .floor-hotspot,
+.floor-group[data-floor="PB"].is-active .floor-hotspot {
+  fill: transparent !important;
+  stroke: transparent !important;
+  filter: none !important;
+}
+
+.floor-group[data-floor="PB"] .floor-slab-top,
+.floor-group[data-floor="PB"] .floor-slab-bot,
+.floor-group[data-floor="PB"]:hover .floor-slab-top,
+.floor-group[data-floor="PB"]:hover .floor-slab-bot,
+.floor-group[data-floor="PB"].is-active .floor-slab-top,
+.floor-group[data-floor="PB"].is-active .floor-slab-bot {
+  stroke: transparent !important;
+  filter: none !important;
+}
+
+.floor-group[data-floor="PB"] .svg-badge {
+  display: none !important;
+}
+
+/* Etiqueta flotante en el extremo izquierdo del piso */
+.svg-badge {
+  opacity: 0;
+  transform: translateX(-15px);
+  transition: opacity 0.3s ease, transform 0.3s var(--ease-lux);
+  pointer-events: none;
+}
+
+.floor-group:hover .svg-badge,
+.floor-group.is-active .svg-badge {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* 4. Barra Superior Discreta de Marca */
+.brand-pill {
+  position: absolute;
+  top: 26px;
+  left: 32px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(10, 14, 22, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 10px 22px;
+  border-radius: 40px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  transition: opacity 0.5s ease;
+}
+
+.brand-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent-gold);
+  box-shadow: 0 0 10px var(--accent-gold);
+}
+
+.brand-title {
+  font-size: 0.82rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.brand-divider {
+  width: 1px;
+  height: 14px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.brand-meta {
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+}
+
+/* 5. Panel Lateral Flotante a la Derecha ("Selecciona tu piso") */
+.floating-sidebar {
+  position: absolute;
+  top: 28px;
+  right: 32px;
+  width: 360px;
+  background: var(--panel-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--panel-border);
+  border-radius: 20px;
+  padding: 28px 24px;
+  z-index: 20;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transition: all 0.4s var(--ease-lux);
+}
+
+.floating-sidebar.is-immersive {
+  border-color: rgba(207, 168, 100, 0.35);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.65), 0 0 25px rgba(207, 168, 100, 0.15);
+}
+
+.sidebar-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 14px;
+}
+
+.sidebar-badge {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 2.2px;
+  font-weight: 600;
+  color: var(--accent-gold);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sidebar-title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.sidebar-instructions {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+/* Tarjeta Dinámica de Datos del Piso Activo */
+.floor-dynamic-card {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: all 0.3s ease;
+}
+
+.card-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-floor-title {
+  font-size: 1.28rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.card-status-badge {
+  font-size: 0.7rem;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: rgba(46, 204, 113, 0.15);
+  color: #2ecc71;
+  border: 1px solid rgba(46, 204, 113, 0.35);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.card-specs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.spec-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.spec-label {
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+}
+
+.spec-val {
+  font-size: 0.96rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.card-pricing-row {
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.price-label {
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+}
+
+.price-number {
+  font-size: 1.28rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  letter-spacing: -0.3px;
+}
+
+/* Botón de Entrada Inmersiva al Departamento */
+.btn-enter-apartment {
+  width: 100%;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, rgba(207, 168, 100, 0.25) 0%, rgba(207, 168, 100, 0.1) 100%);
+  border: 1px solid var(--accent-gold);
+  border-radius: 10px;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  margin-top: 2px;
+}
+
+.btn-enter-apartment:hover {
+  background: linear-gradient(135deg, rgba(207, 168, 100, 0.45) 0%, rgba(207, 168, 100, 0.25) 100%);
+  box-shadow: 0 8px 24px rgba(207, 168, 100, 0.35);
+  transform: translateY(-2px);
+}
+
+.sidebar-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  margin-top: -4px;
+}
+
+.hint-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent-gold);
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+/* 6. Botón Flotante para Restablecer Zoom ("← Volver a la fachada") */
+.btn-reset-zoom {
+  position: absolute;
+  bottom: 32px;
+  left: 32px;
+  z-index: 25;
+  background: rgba(10, 14, 22, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  transition: all 0.35s var(--ease-lux);
+}
+
+.btn-reset-zoom.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.btn-reset-zoom:hover {
+  background: rgba(207, 168, 100, 0.2);
+  border-color: var(--accent-gold);
+  color: #ffffff;
+  box-shadow: 0 12px 35px rgba(207, 168, 100, 0.25);
+  transform: translateY(-2px);
+}
+
+.btn-reset-zoom small {
+  color: var(--accent-gold);
+  font-weight: 500;
+}
+
+/* 7. Capa de Transición de Video para el Interior del Departamento */
+.video-transition-layer {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 50;
+  opacity: 0;
+  pointer-events: none;
+  background-color: #05070b;
+  transition: opacity 0.85s var(--ease-lux);
+  overflow: hidden;
+}
+
+.video-transition-layer.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Botón de Salida Inmediata en Capa de Video */
+.btn-quick-exit {
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  z-index: 70;
+  background: rgba(10, 14, 22, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  padding: 10px 22px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  pointer-events: auto;
+}
+
+.btn-quick-exit:hover {
+  background: rgba(207, 168, 100, 0.25);
+  border-color: var(--accent-gold);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px var(--accent-gold-glow);
+}
+
+.video-transition-layer.is-arrived .btn-quick-exit {
+  display: none;
+}
+
+#apartmentVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Transición óptica cálida (Crossfade Golden Hour) para difuminar la diferencia de luz */
+.video-light-flash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(220, 160, 90, 0.45) 0%, rgba(10, 14, 22, 0.75) 100%);
+  opacity: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  transition: opacity 0.7s ease;
+}
+
+.video-transition-layer.is-flashing .video-light-flash {
+  opacity: 1;
+}
+
+/* 8. HUD del Departamento Interior (Aparece al terminar el recorrido del video) */
+.interior-hud {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  right: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.6s var(--ease-lux);
+}
+
+.video-transition-layer.is-arrived .interior-hud {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.interior-brand-box {
+  background: rgba(10, 14, 22, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 18px 24px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.interior-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+}
+
+.interior-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  color: #ffffff;
+}
+
+.interior-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.interior-controls {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-interior-action {
+  background: rgba(10, 14, 22, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  padding: 12px 22px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.btn-interior-action:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
+}
+
+.btn-interior-action.primary {
+  background: linear-gradient(135deg, rgba(207, 168, 100, 0.85) 0%, rgba(180, 140, 75, 0.9) 100%);
+  border-color: var(--accent-gold);
+  color: #07090e;
+  font-weight: 700;
+}
+
+.btn-interior-action.primary:hover {
+  box-shadow: 0 10px 30px var(--accent-gold-glow);
+  filter: brightness(1.1);
+}
+
+/* Ocultar elementos principales durante la inmersión de video */
+body.in-apartment-view .brand-pill,
+body.in-apartment-view .floating-sidebar,
+body.in-apartment-view .btn-reset-zoom {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 9. Media Queries para Pantallas Compactas */
+@media (max-width: 900px) {
+  .brand-pill {
+    top: 16px;
+    left: 16px;
+  }
+  .floating-sidebar {
+    top: auto;
+    bottom: 20px;
+    right: 20px;
+    left: 20px;
+    width: auto;
+    padding: 20px;
+    border-radius: 16px;
+  }
+  .interior-hud {
+    flex-direction: column;
+    gap: 12px;
+    top: 16px;
+    left: 16px;
+    right: 16px;
+  }
+}

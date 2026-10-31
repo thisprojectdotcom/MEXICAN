@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Masterplan Interactivo - Residencial Exclusivo</title>
+
+  <!-- Tipografía Minimalista -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Hoja de Estilos -->
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+  <!-- Barra de Marca Flotante -->
+  <nav class="brand-pill" aria-label="Navegación principal">
+    <div class="brand-dot"></div>
+    <span class="brand-title">Residencial Exclusivo</span>
+    <div class="brand-divider"></div>
+    <span class="brand-meta">7 Pisos + Planta Baja</span>
+  </nav>
+
+  <!-- Botón Flotante para Salir del Zoom (Aparece tras hacer clic en un piso) -->
+  <button class="btn-reset-zoom" id="btnResetZoom" aria-label="Restablecer vista panorámica">
+    <span>← Volver a la fachada</span>
+  </button>
+
+  <!-- 1. Contenedor Maestro Pantalla Completa: El Render es el fondo total -->
+  <main class="stage-fullscreen" id="stageFullscreen">
+
+    <!-- SVG Responsivo en Espacio Nativo 4788 x 3584 -->
+    <svg 
+      viewBox="0 0 4788 3584" 
+      preserveAspectRatio="xMidYMid slice" 
+      class="building-svg" 
+      id="buildingSvg"
+      aria-label="Mapa interactivo del edificio"
+    >
+      <!-- Grupo Escenario con soporte de Zoom Dinámico -->
+      <g id="sceneWrapper" class="scene-wrapper">
+
+        <!-- Imagen Original en Alta Resolución como base -->
+        <image 
+          href="./IMAGENPRINCIPAL/tungtungsahur.jpg" 
+          x="0" 
+          y="0" 
+          width="4788" 
+          height="3584" 
+          id="masterBgImage"
+        />
+
+        <!-- Capa de Zonas Interactivas (7 Pisos + Planta Baja) -->
+        <g id="floorsOverlay">
+
+          <!-- PISO 7 • PENTHOUSE (Bajo los arcos) -->
+          <g class="floor-group" data-floor="7" id="floor-7" tabindex="0" role="button" aria-label="Piso 7 Penthouse">
+            <rect class="floor-hotspot" x="730" y="200" width="3630" height="410" rx="24" />
+            <line class="floor-slab-top" x1="730" y1="200" x2="4360" y2="200" />
+            <line class="floor-slab-bot" x1="730" y1="610" x2="4360" y2="610" />
+            <g class="svg-badge" transform="translate(770, 390)">
+              <rect x="0" y="0" width="230" height="48" rx="8" fill="rgba(10,14,22,0.85)" stroke="rgba(255,255,255,0.3)" />
+              <text x="115" y="30" fill="#ffffff" font-size="22" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" text-anchor="middle">PISO 7 • PH</text>
+            </g>
+          </g>
+
+          <!-- PISO 6 -->
+          <g class="floor-group" data-floor="6" id="floor-6" tabindex="0" role="button" aria-label="Piso 6">
+            <rect class="floor-hotspot" x="680" y="610" width="3730" height="220" rx="10" />
+            <line class="floor-slab-top" x1="680" y1="610" x2="4410" y2="610" />
+            <line class="floor-slab-bot" x1="680" y1="830" x2="4410" y2="830" />
+            <g class="svg-badge" transform="translate(720, 710)">
+              <rect x="0" y="0" width="180" height="44" rx="8" fill="rgba(10,14,22,0.85)" stroke="rgba(255,255,255,0.3)" />
+              <text x="90" y="28" fill="#ffffff" font-size="20" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" text-anchor="middle">PISO 6</text>
+            </g>
+          </g>
+
+          <!-- PISO 5 -->
+          <g class="floor-group" data-floor="5" id="floor-5" tabindex="0" role="button" aria-label="Piso 5">
+            <rect class="floor-hotspot" x="660" y="830" width="3770" height="224" rx="10" />
+            <line class="floor-slab-top" x1="660" y1="830" x2="4430" y2="830" />
+            <line class="floor-slab-bot" x1="660" y1="1054" x2="4430" y2="1054" />
+            <g class="svg-badge" transform="translate(700, 930)">
+              <rect x="0" y="0" width="180" height="44" rx="8" fill="rgba(10,14,22,0.85)" stroke="rgba(255,255,255,0.3)" />
+              <text x="90" y="28" fill="#ffffff" font-size="20" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" text-anchor="middle">PISO 5</text>
+            </g>
+          </g>
+
+          <!-- PISO 4 -->
+          <g class="floor-group" data-floor="4" id="floor-4" tabindex="0" role="button" aria-label="Piso 4">
+            <rect class="floor-hotspot" x="650" y="1054" width="3790" height="228" rx="10" />
+            <line class="floor-slab-top" x1="650" y1="1054" x2="4440" y2="1054" />
+            <line class="floor-slab-bot" x1="650" y1="1282" x2="4440" y2="1282" />
+            <g class="svg-badge" transform="translate(690, 1160)">
+              <rect x="0" y="0" width="180" height="44" rx="8" fill="rgba(10,14,22,0.85)" stroke="rgba(255,255,255,0.3)" />
+              <text x="90" y="28" fill="#ffffff" font-size="20" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" text-anchor="middle">PISO 4</text>
+            </g>
+          </g>
+
+          <!-- PISO 3 -->
+          <g class="floor-group" data-floor="3" id="floor-3" tabindex="0" role="button" aria-label="Piso 3">
+            <rect class="floor-hotspot" x="650" y="1282" width="3790" height="232" rx="10" />
+            <line class="floor-slab-top" x1="650" y1="1282" x2="4440" y2="1282" />
+            <line class="floor-slab-bot" x1="650" y1="1514" x2="4440" y2="1514" />
+            <g class="svg-badge" transform="translate(690, 1390)">
+              <rect x="0" y="0" width="180" height="44" rx="8" fill="rgba(10,14,22,0.85)" stroke="rgba(255,255,255,0.3)" />
+              <text x="90" y="28" fill="#ffffff" font-size="20" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" text-anchor="middle">PISO 3</text>
+            </g>
+          </g>
+
+          <!-- PISO 2 (CONECTADO AL VIDEO TOUR THEOUTCOME.MP4) -->
+          <g class="floor-group is-active" data-floor="2" id="floor-2" tabindex="0" role="button" aria-label="Piso 2 con Video Tour">
+            <rect class="floor-hotspot" x="660" y="1514" width="3770" height="228" rx="10" />
+            <line class="floor-slab-top" x1="660" y1="1514" x2="4430" y2="1514" />
+            <line class="floor-slab-bot" x1="660" y1="1742" x2="4430" y2="1742" />
+            <g class="svg-badge" transform="translate(700, 1620)">
+              <rect x="0" y="0" width="220" height="44" rx="8" fill="rgba(10,14,22,0.85)" stroke="rgba(207,168,100,0.5)" />
+              <text x="110" y="28" fill="#cfa864" font-size="18" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" text-anchor="middle">PISO 2 • 🎬 VIDEO</text>
+            </g>
+          </g>
+
+          <!-- PISO 1 -->
+          <g class="floor-group" data-floor="1" id="floor-1" tabindex="0" role="button" aria-label="Piso 1">
+            <rect class="floor-hotspot" x="670" y="1742" width="3750" height="228" rx="10" />
+            <line class="floor-slab-top" x1="670" y1="1742" x2="4420" y2="1742" />
+            <line class="floor-slab-bot" x1="670" y1="1970" x2="4420" y2="1970" />
+            <g class="svg-badge" transform="translate(710, 1850)">
+              <rect x="0" y="0" width="180" height="44" rx="8" fill="rgba(10,14,22,0.85)" stroke="rgba(255,255,255,0.3)" />
+              <text x="90" y="28" fill="#ffffff" font-size="20" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" text-anchor="middle">PISO 1</text>
+            </g>
+          </g>
+
+          <!-- PLANTA BAJA (Lobby / Amenities) -->
+          <g class="floor-group" data-floor="PB" id="floor-PB" tabindex="0" role="button" aria-label="Planta Baja Lobby">
+            <rect class="floor-hotspot" x="680" y="1970" width="3730" height="390" rx="14" />
+            <line class="floor-slab-top" x1="680" y1="1970" x2="4410" y2="1970" />
+            <line class="floor-slab-bot" x1="680" y1="2360" x2="4410" y2="2360" />
+            <g class="svg-badge" transform="translate(720, 2140)">
+              <rect x="0" y="0" width="230" height="48" rx="8" fill="rgba(10,14,22,0.85)" stroke="rgba(255,255,255,0.3)" />
+              <text x="115" y="30" fill="#ffffff" font-size="22" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" text-anchor="middle">PLANTA BAJA</text>
+            </g>
+          </g>
+
+        </g>
+      </g>
+    </svg>
+
+  </main>
+
+  <!-- 2. Capa de Video Inmersivo (Conectada a theoutcome.mp4) -->
+  <div class="video-transition-layer" id="videoTransitionLayer">
+    <video 
+      id="apartmentVideo" 
+      src="./theoutcome.mp4" 
+      playsinline 
+      muted 
+      preload="auto"
+    ></video>
+    
+    <!-- Destello Óptico Cálido para Transición Suave de Iluminación -->
+    <div class="video-light-flash" id="videoLightFlash"></div>
+
+    <!-- Botón de Salida Inmediata durante el Vuelo -->
+    <button class="btn-quick-exit" id="btnQuickExit" aria-label="Salir a la fachada">
+      <span>✕ Salir a la fachada</span>
+    </button>
+
+    <!-- HUD del Departamento al Ingresar -->
+    <div class="interior-hud" id="interiorHud">
+      <div class="interior-brand-box">
+        <span class="interior-badge">Tour Virtual • Residencia</span>
+        <h2 class="interior-title" id="interiorHudTitle">Departamento Piso 2</h2>
+        <p class="interior-subtitle">Sala principal, terraza panorámica y cocina abierta</p>
+      </div>
+
+      <div class="interior-controls">
+        <button class="btn-interior-action" id="btnReplayVideo" title="Repetir la animación de entrada">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+          <span>Repetir Vuelo</span>
+        </button>
+        <button class="btn-interior-action primary" id="btnExitApartment" title="Regresar a la vista panorámica del edificio">
+          <span>← Salir a la Fachada</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Panel Lateral Flotante a la Derecha ("Selecciona tu piso") -->
+  <aside class="floating-sidebar" id="floatingSidebar" aria-label="Panel informativo del piso">
+    <div class="sidebar-header">
+      <div class="sidebar-badge">
+        <span>Residencial</span>
+        <span>•</span>
+        <span>Vista Panorámica</span>
+      </div>
+      <h2 class="sidebar-title">Selecciona tu piso</h2>
+    </div>
+
+    <p class="sidebar-instructions">
+      Pasa el cursor sobre la fachada para explorar cada nivel o haz clic para acceder.
+    </p>
+
+    <!-- Tarjeta Dinámica de Datos del Piso Activo -->
+    <div class="floor-dynamic-card" id="floorDynamicCard">
+      <div class="card-top-row">
+        <span class="card-floor-title" id="displayFloorTitle">Piso 2</span>
+        <span class="card-status-badge" id="displayFloorStatus">Disponible</span>
+      </div>
+
+      <div class="card-specs-grid">
+        <div class="spec-cell">
+          <span class="spec-label">Recámaras</span>
+          <span class="spec-val" id="displayRooms">2 Recámaras</span>
+        </div>
+        <div class="spec-cell">
+          <span class="spec-label">Superficie</span>
+          <span class="spec-val" id="displayArea">140 m²</span>
+        </div>
+      </div>
+
+      <div class="card-pricing-row">
+        <span class="price-label">Precio base desde</span>
+        <span class="price-number" id="displayPrice">$315,000 USD</span>
+      </div>
+
+      <!-- Botón de Entrada por Video Tour (Activo para Piso 2) -->
+      <button class="btn-enter-apartment" id="btnEnterApartment">
+        <span>🎬 Ver Tour Interior (Video)</span>
+      </button>
+    </div>
+
+    <div class="sidebar-hint">
+      <div class="hint-dot"></div>
+      <span>Haz clic en el piso para volar al departamento</span>
+    </div>
+  </aside>
+
+  <!-- Lógica JavaScript Vanilla -->
+  <script src="./app.js"></script>
+
+</body>
+</html>
